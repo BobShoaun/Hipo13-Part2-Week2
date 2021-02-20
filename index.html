@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo list</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="newTask" @keypress.enter="addTodo">
+    <todo-list v-on:remove="removeTodo" v-bind:todos="todos"></todo-list>
+  </div>
+
+  <script type="text/x-template" id="todo-item">
+    <div class="todo-item">
+      <div class="todo">
+        <input type="checkbox" name="" id="" v-model="isDone">
+        <p>{{task}}</p>
+      </div>
+      <button v-on:click="() => $emit('remove', id)">Remove</button>
+    </div>
+  </script>
+
+  <script type="text/x-template" id="todo-list">
+    <div class="todo-list">
+      <div v-for="todo in todos"> 
+        <todo-item v-on:remove="id => $emit('remove', id)" v-bind:id="todo.id" v-bind:task="todo.task" v-bind:isDone="todo.isDone"></todo-item>
+      </div>
+    </div>
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>

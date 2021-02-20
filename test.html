@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ message }}</h1>
+    <p>{{counter}}</p>
+    <button v-on:click="incrementCounter">add</button>
+    <p>{{ doubleCounter }}</p>
+    <my-component v-bind:message="'this is a first component'"></my-component>
+    <my-component></my-component>
+    <my-component v-bind:message="'this is the third component'"></my-component>
+    <my-component></my-component>
+  </div>
+
+  <script>
+    Vue.component('my-component', {
+      template: `
+      <div>
+        <p> this is my component: {{ message }} </p>
+      </div>
+      `,
+      data() {
+        return {
+          
+        };
+      },
+      // props: ['message'],
+      props: {
+        message: {
+          default: "hello!!!",
+          // required: true,
+        }
+      }
+    });
+
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          message: "hello vue js",
+          counter: 0,
+        }
+      },
+      methods: {
+        incrementCounter() {
+          this.counter++;
+        },
+      },
+      computed: {
+        doubleCounter() {
+          return this.counter * this.counter;
+        }
+      },
+      component: {
+
+      }
+    });
+
+  </script>
+</body>
+
+</html>
